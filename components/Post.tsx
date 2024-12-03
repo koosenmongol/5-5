@@ -50,7 +50,11 @@ const Post = () => {
           <View key="1" style={styles.page1}>
             {postData.map((medee) => (
               <View>
-                <Image style={styles.postImage} source={medee.img} />
+                <Link href={"/posts/" + medee.id} asChild>
+                  <TouchableOpacity>
+                    <Image style={styles.postImage} source={medee.img} />
+                  </TouchableOpacity>
+                </Link>
               </View>
             ))}
           </View>

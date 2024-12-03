@@ -8,7 +8,7 @@ const profile = () => {
       <View style={styles.profileFollowers}>
         <Image
           style={styles.proImg}
-          source={require("../assets/images/AccountIcon2.png")}
+          source={require("../../assets/images/AccountIcon2.png")}
         />
         <View style={styles.followersMain}>
           <View style={styles.followersNumber}>
@@ -36,7 +36,7 @@ const profile = () => {
           <Text style={styles.link}>Link goes here</Text>
         </View>
         <View style={styles.bioFollowed}>
-          <Image source={require("../assets/images/avatars.png")} />
+          <Image source={require("../../assets/images/avatars.png")} />
           <Text style={styles.bioFollowedText}>
             Followed by username, username and 100 others
           </Text>
