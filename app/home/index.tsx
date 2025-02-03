@@ -36,7 +36,7 @@ const index = () => {
       </View>
       <ScrollView>
         {postData.map((dataPost) => (
-          <View style={styles.post}>
+          <View>
             <View style={styles.postHeader}>
               <View
                 style={{ flexDirection: "row", alignItems: "center", gap: 8 }}
