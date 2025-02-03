@@ -1,11 +1,20 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import PagerView from "react-native-pager-view";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Post from "@/components/Post";
 import Entypo from "@expo/vector-icons/Entypo";
 import { postData } from "@/src/data";
-
+import { Link } from "expo-router";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Feather from "@expo/vector-icons/Feather";
 const index = () => {
   return (
     <View style={styles.container}>
@@ -42,8 +51,25 @@ const index = () => {
               </View>
               <Entypo name="dots-three-horizontal" size={24} color="black" />
             </View>
-            <View></View>
-            <View></View>
+            <Image
+              style={{ width: "100%", height: Dimensions.get("window").width }}
+              source={dataPost.img}
+            />
+            <View>
+              <View style={styles.commentStyle}>
+                <AntDesign name="hearto" size={24} color="black" />
+                <Link
+                  href={{
+                    pathname: "/comments",
+                    params: { id: dataPost.id },
+                  }}
+                  asChild
+                >
+                  <FontAwesome name="comment-o" size={24} color="black" />
+                </Link>
+                <Feather name="send" size={24} color="black" />
+              </View>
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -54,6 +80,10 @@ const index = () => {
 export default index;
 
 const styles = StyleSheet.create({
+  commentStyle: {
+    flexDirection: "row",
+    gap: 10,
+  },
   container: {
     width: "100%",
     flex: 1,
