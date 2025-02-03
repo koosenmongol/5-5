@@ -50,7 +50,7 @@ const profile = () => {
 export default profile;
 const styles = StyleSheet.create({
   container: {
-    width: 390,
+    width: "100%",
     flex: 1,
     backgroundColor: "white",
   },
@@ -61,23 +61,23 @@ const styles = StyleSheet.create({
   },
   link: {},
   bioText: {
-    width: 366,
+    width: "93%",
     height: 89,
   },
   bioFollowed: {
-    width: 366,
+    width: "93%",
     height: 36,
     fontSize: 13,
     flexDirection: "row",
     alignItems: "center",
   },
   bioEdit: {
-    width: 366,
+    width: "93%",
     height: 30,
   },
   bio: {
     fontSize: 13,
-    width: 390,
+    width: "100%",
     height: 195,
     flexDirection: "column",
     justifyContent: "center",
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   profileFollowers: {
-    width: 390,
+    width: "100%",
     height: 90,
     flexDirection: "row",
     alignItems: "center",
