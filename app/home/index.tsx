@@ -1,8 +1,10 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import PagerView from "react-native-pager-view";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Post from "@/components/Post";
+import Entypo from "@expo/vector-icons/Entypo";
+import { postData } from "@/src/data";
 
 const index = () => {
   return (
@@ -23,6 +25,28 @@ const index = () => {
         <Image source={require("../../assets/home/Story user (2).png")} />
         <Image source={require("../../assets/home/Story user (3).png")} />
       </View>
+      <ScrollView>
+        {postData.map((dataPost) => (
+          <View style={styles.post}>
+            <View style={styles.postHeader}>
+              <View
+                style={{ flexDirection: "row", alignItems: "center", gap: 8 }}
+              >
+                <Image
+                  style={styles.profileImage}
+                  source={dataPost.profileImage}
+                />
+                <Text style={{ fontSize: 14, fontWeight: "bold" }}>
+                  {dataPost.profileName}
+                </Text>
+              </View>
+              <Entypo name="dots-three-horizontal" size={24} color="black" />
+            </View>
+            <View></View>
+            <View></View>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -50,5 +74,17 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 105,
     gap: 12,
+  },
+  postHeader: {
+    width: "100%",
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 7,
+  },
+  profileImage: {
+    width: 36,
+    height: 36,
   },
 });
