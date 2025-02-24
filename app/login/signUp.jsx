@@ -1,5 +1,3 @@
-// signIn Page
-
 import {
   Image,
   StyleSheet,
@@ -8,10 +6,17 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "expo-router";
+import { addUser } from "../../firebaseConfig";
 
-const index = () => {
+const singUp = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleClick = async () => {
+    const responce = await addUser(email, password);
+    console.log("responce", responce);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.signIn}>
@@ -19,16 +24,22 @@ const index = () => {
           style={{ width: "60%", height: "10%" }}
           source={require("@/assets/login/iglogo.png")}
         />
-        <TextInput placeholder="email" style={styles.inputStyle} />
-        <TextInput placeholder="password" style={styles.inputStyle} />
-        <TouchableOpacity style={styles.logIn}>
-          <Text style={styles.loginText}>Log in</Text>
-        </TouchableOpacity>
-        <Link href={"/login/signUp"} asChild>
-          <TouchableOpacity>
-            <Text style={{ fontWeight: "bold", color: "#4CB5F9" }}>
-              Sign up
-            </Text>
+        <TextInput
+          onChangeText={(text) => setEmail(text)}
+          placeholder="Email"
+          style={styles.inputStyle}
+        />
+        <TextInput
+          onChangeText={(text) => setPassword(text)}
+          placeholder="Password"
+          style={styles.inputStyle}
+        />
+        <TextInput placeholder="Full name" style={styles.inputStyle} />
+        <TextInput placeholder="Username" style={styles.inputStyle} />
+
+        <Link href={"/login"} asChild>
+          <TouchableOpacity onPress={handleClick} style={styles.logIn}>
+            <Text style={styles.loginText}>Sign up</Text>
           </TouchableOpacity>
         </Link>
       </View>
@@ -36,7 +47,7 @@ const index = () => {
   );
 };
 
-export default index;
+export default singUp;
 
 const styles = StyleSheet.create({
   container: {
@@ -58,7 +69,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#DDDDDD",
     width: "75%",
-    height: "15%",
+    height: "12%",
     borderRadius: 3,
   },
   logIn: {
@@ -71,5 +82,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  loginText: { color: "white" },
+  loginText: { color: "white", fontWeight: "bold" },
 });
