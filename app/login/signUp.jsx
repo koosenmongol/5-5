@@ -15,7 +15,6 @@ const singUp = () => {
   const [password, setPassword] = useState("");
   const handleClick = async () => {
     const responce = await addUser(email, password);
-    console.log("responce", responce);
   };
   return (
     <View style={styles.container}>

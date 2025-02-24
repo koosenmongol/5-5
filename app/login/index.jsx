@@ -21,7 +21,6 @@ const index = () => {
       const responce = await newtreh(email, password);
       router.push("/home");
       setError("");
-      console.log("Нэвтэрлээ");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;

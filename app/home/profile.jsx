@@ -1,8 +1,35 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import Post from "@/components/Post";
 import { Link } from "expo-router";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/firebaseConfig";
+import { getAuth } from "firebase/auth";
 const profile = () => {
+  const [userData, setUserData] = useState({
+    username: "",
+    category: "",
+    bio: "",
+    link: "",
+  });
+  const email = getAuth().currentUser.email;
+  useEffect(() => {
+    handleUser(email);
+    console.log(email);
+  }, []);
+
+  const handleUser = async (email) => {
+    const docRef = doc(db, "users", email);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Data");
+
+      setUserData(docSnap.data());
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.profileFollowers}>
@@ -27,13 +54,10 @@ const profile = () => {
       </View>
       <View style={styles.bio}>
         <View style={styles.bioText}>
-          <Text style={styles.bold}>Username</Text>
-          <Text>Category/Genre text</Text>
-          <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam,
-            tenetur.
-          </Text>
-          <Text style={styles.link}>Link goes here</Text>
+          <Text style={styles.bold}>{userData.username}</Text>
+          <Text>{userData.category}</Text>
+          <Text>{userData.bio}</Text>
+          <Text style={styles.link}>{userData.link}</Text>
         </View>
         <View style={styles.bioFollowed}>
           <Image source={require("../../assets/images/avatars.png")} />
@@ -41,7 +65,22 @@ const profile = () => {
             Followed by username, username and 100 others
           </Text>
         </View>
-        <View style={styles.bioEdit}></View>
+        <View style={styles.bioEdit}>
+          <Link href={"/edit"} asChild>
+            <TouchableOpacity
+              style={{
+                width: 200,
+                borderWidth: 1,
+                borderColor: "gray",
+                borderRadius: 5,
+                height: 25,
+                alignItems: "center",
+              }}
+            >
+              <Text>Edit</Text>
+            </TouchableOpacity>
+          </Link>
+        </View>
       </View>
       <Post />
     </View>

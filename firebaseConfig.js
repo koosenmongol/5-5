@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-
+import { getFirestore } from "firebase/firestore";
 // Optionally import the services that you want to use
 import {
   getAuth,
@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 // import {...} from 'firebase/database';
-// import {...} from 'firebase/firestore';
+import { doc, getDoc } from "firebase/firestore";
 // import {...} from 'firebase/functions';
 // import {...} from 'firebase/storage';
 
@@ -24,6 +24,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+export const db = getFirestore(app);
 export const addUser = (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
