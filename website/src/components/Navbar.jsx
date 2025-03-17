@@ -19,6 +19,7 @@ const Navbar = () => {
             {" "}
           </div>
         </div>
+        {/* Mobile menu */}
         {/* links */}
         <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link, index) => (
